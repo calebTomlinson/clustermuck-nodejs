@@ -1,6 +1,5 @@
 var cluster = require('cluster');
 var clustermuck = require('./clusterMuck');
-var sinon = require('sinon');
 var assert = require('assert');
 var http = require('http');
 

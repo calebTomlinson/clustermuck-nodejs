@@ -92,4 +92,9 @@ if(cluster.isMaster){
       });
     });
   }, 3000);
+
+  //timeout and exit 1 if not exited earlier
+  setTimeout(function(){
+    process.exit(1);
+  }, 30000);
 }

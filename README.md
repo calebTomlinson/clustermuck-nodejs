@@ -1,6 +1,19 @@
 clustermuck-nodejs
 ==================
 
-When you need to rotate between workers in a cluster for node garbage collection you need clustermuck.
+Cluster your mucky garbage. A strategy for non-blocking garbage collection in nodejs.
 
-Warning: this is alpha and completely unstable until 0.1.0. Lock down your version until then and feel free to contribute.
+We were seeing apps blocking for 100-300ms and longer for garbage collection. This module attempts to circumvent those pauses by utilizing nodejs clustering.
+
+1) Start a cluster of workers to accept traffic.
+
+2) The master coordinates the following loop in each child
+
+```
+for (workers in cluster){
+  Worker stops accepting connections.
+  Once requests have finished and connections have clossed: collect garbage
+  start accepting connections
+  tell master gc is finished
+}
+```

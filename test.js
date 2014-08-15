@@ -87,6 +87,7 @@ if(cluster.isMaster){
         }, 6000);
 
         resp.on('end', function(){
+          console.log('tests passed');
           process.exit();
         });
       });
@@ -95,6 +96,7 @@ if(cluster.isMaster){
 
   //timeout and exit 1 if not exited earlier
   setTimeout(function(){
+    console.log('tests timed out');
     process.exit(1);
   }, 30000);
 }

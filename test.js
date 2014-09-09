@@ -15,11 +15,13 @@ function initServer (port, cb){
   cb(server);
 }
 
-function postCollect(){
+function postCollect(cb){
   process.send('collected on ' + cluster.worker.id);
+  cb();
 }
-function preCollect(){
+function preCollect(cb){
   process.send('collecting on ' + cluster.worker.id);
+  cb();
 }
 
 var pre = [0,0,0,0,0];

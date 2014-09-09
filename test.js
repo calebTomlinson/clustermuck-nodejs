@@ -3,7 +3,7 @@ var clustermuck = require('./clusterMuck');
 var assert = require('assert');
 var http = require('http');
 
-function initServer (port){
+function initServer (port, cb){
   var server = http.createServer(function (request, response) {
     response.writeHead(200, {"Content-Type": "text/plain"});
     response.write(String(cluster.worker.id));
@@ -12,7 +12,7 @@ function initServer (port){
     }, 10000);
   });
   server.listen(port);
-  return server;
+  cb(server);
 }
 
 function postCollect(){

@@ -1,6 +1,6 @@
 {
   "name": "clustermuck",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Node cluster garbage collection rotation",
   "main": "clustermuck.js",
   "scripts": {

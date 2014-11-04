@@ -21,7 +21,7 @@ function postCollect(cb){
 }
 function preCollect(cb){
   process.send('collecting on ' + cluster.worker.id);
-  cb();
+  setImmediate(cb);
 }
 
 var pre = [0,0,0,0,0];
@@ -67,15 +67,15 @@ if(cluster.isMaster){
 
   //it collects and calls pre/post collect on all workers
   setTimeout(function(){
-    assert(pre[1] > 1);
-    assert(pre[2] > 1);
-    assert(pre[3] > 1);
-    assert(pre[4] > 1);
-    assert(post[1] > 1);
-    assert(post[2] > 1);
-    assert(post[3] > 1);
-    assert(post[4] > 1);
-  }, 3000);
+    assert(pre[1] >= 1);
+    assert(pre[2] >= 1);
+    assert(pre[3] >= 1);
+    assert(pre[4] >= 1);
+    assert(post[1] >= 1);
+    assert(post[2] >= 1);
+    assert(post[3] >= 1);
+    assert(post[4] >= 1);
+  }, 30000);
 
   //it finishes requests before collecting
   setTimeout(function(){
@@ -94,11 +94,11 @@ if(cluster.isMaster){
         });
       });
     });
-  }, 3000);
+  }, 35000);
 
   //timeout and exit 1 if not exited earlier
   setTimeout(function(){
     console.log('tests timed out');
     process.exit(1);
-  }, 30000);
+  }, 60000);
 }
